@@ -26,4 +26,25 @@
             </div>
         </div>
     </div>
+
+    <form action="{{ route('profile.update', ['username' => $user->username]) }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" value="{{ $user->username }}">
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" value="{{ $user->email }}">
+
+        <label for="bio">Bio:</label>
+        <textarea id="bio" name="bio">{{ $user->bio }}</textarea>
+
+        <label for="profile_picture">Profile Picture:</label>
+        <input type="file" id="profile_picture" name="profile_picture">
+
+        <button type="submit">Update Profile</button>
+    </form>
+
+    <x-dropdown-link :href="route('profile.edit', ['username' => auth()->user()->username])">
+    {{ __('Profile') }}
+</x-dropdown-link>
 </x-app-layout>
