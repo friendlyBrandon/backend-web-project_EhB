@@ -33,41 +33,52 @@
             <!-- Right -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
 
-                <x-dropdown align="right" width="48">
+    @auth
 
-                    <x-slot name="trigger">
-                        <button class="px-3 py-2 text-sm text-gray-500 dark:text-gray-300">
-                            {{ Auth::user()->name }}
-                        </button>
-                    </x-slot>
+        <x-dropdown align="right" width="48">
 
-                    <x-slot name="content">
+            <x-slot name="trigger">
+                <button class="px-3 py-2 text-sm text-gray-500 dark:text-gray-300">
+                    {{ auth()->user()->name }}
+                </button>
+            </x-slot>
 
-                        <x-dropdown-link :href="route('profile.edit')">
-                            Profile
-                        </x-dropdown-link>
+            <x-slot name="content">
 
-                        @if(auth()->user()->is_admin)
-                            <x-dropdown-link :href="route('admin.page')">
-                                Admin Panel
-                            </x-dropdown-link>
-                        @endif
+                <x-dropdown-link :href="route('profile.edit')">
+                    Profile
+                </x-dropdown-link>
 
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
+                @if(auth()->user()->is_admin)
+                    <x-dropdown-link :href="route('admin.page')">
+                        Admin Panel
+                    </x-dropdown-link>
+                @endif
 
-                            <x-dropdown-link :href="route('logout')"
-                                onclick="event.preventDefault(); this.closest('form').submit();">
-                                Log Out
-                            </x-dropdown-link>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
 
-                        </form>
+                    <x-dropdown-link :href="route('logout')"
+                        onclick="event.preventDefault(); this.closest('form').submit();">
+                        Log Out
+                    </x-dropdown-link>
 
-                    </x-slot>
+                </form>
 
-                </x-dropdown>
+            </x-slot>
 
-            </div>
+        </x-dropdown>
+
+    @else
+
+        <div class="flex space-x-3">
+            <a href="{{ route('login') }}" class="text-sm text-gray-500">Login</a>
+            <a href="{{ route('register') }}" class="text-sm text-gray-500">Register</a>
+        </div>
+
+    @endauth
+
+</div>
 
             <!-- Mobile Button -->
             <div class="sm:hidden flex items-center">

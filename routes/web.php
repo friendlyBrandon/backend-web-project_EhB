@@ -35,6 +35,11 @@ Route::get('/dashboard', [FetchUsernameController::class, 'index'])
 Route::get('/profiles', [FetchUsernameController::class, 'index'])
     ->name('profiles');
 
+    Route::get('/profiles-view', function () {
+    $users = \App\Models\User::all();
+    return view('profiles-view', compact('users'));
+})->name('profiles.view');
+
 // Upload images
 Route::get('/upload/{path}', [ProfilePictureController::class, 'UploadImage'])
     ->name('public-profiles.profile-pictures');
