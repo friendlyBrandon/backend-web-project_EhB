@@ -6,10 +6,21 @@
 
             <!-- Profile Picture -->
             @if($user->profile_pic_path)
-                <img src="{{ Storage::url($user->profile_pic_path) }}"
-                     alt="{{ $user->username }} Profile Picture"
-                     class="mx-auto w-24 h-24 rounded-full object-cover mb-4">
-            @endif
+
+    @php
+        $path = str_replace('public/', '', $user->profile_pic_path);
+    @endphp
+
+    <img src="{{ asset('storage/' . $path) }}"
+         class="w-20 h-20 rounded-full object-cover mx-auto mb-4">
+
+@else
+
+    <div class="w-20 h-20 rounded-full bg-gray-700 mx-auto mb-4 flex items-center justify-center text-white text-2xl">
+        {{ strtoupper(substr($user->username, 0, 1)) }}
+    </div>
+
+@endif
 
             <!-- Username -->
             <h1 class="text-2xl font-bold mb-2">
@@ -21,10 +32,35 @@
                 {{ $user->bio ?? 'No bio available yet.' }}
             </p>
 
-            <!-- Email (optional, remove if public) -->
-            <p class="text-sm text-gray-400 mb-6">
-                {{ $user->email }}
-            </p>
+            <!-- Intrests -->
+             @if(!empty($user->interests))
+    <div class="mt-6">
+
+        <h3 class="text-sm text-gray-300 mb-2">
+            Interests
+        </h3>
+
+        <div class="flex flex-wrap justify-center gap-2">
+
+            @foreach($user->interests as $interest)
+
+                <span class="bg-blue-600 text-white text-xs px-3 py-1 rounded-full">
+                    {{ $interest }}
+                </span>
+
+            @endforeach
+
+        </div>
+
+    </div>
+@endif
+
+
+    <!-- Message user -->
+
+
+    </div>
+            @endif
 
             <!-- Edit Button -->
             @if($canEdit)
@@ -32,9 +68,9 @@
                    class="inline-block bg-blue-600 hover:bg-blue-700 text-white text-sm px-5 py-2 rounded-lg">
                     Edit Profile
                 </a>
-            @endif
 
         </div>
+
 
     </div>
 
