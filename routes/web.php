@@ -44,6 +44,11 @@ Route::get('/FAQ', function () {
     return view('FAQ.FAQ');
 })->name('faq');
 
+//Contact us
+Route::get('/contact', function () {
+    return view('contact');
+})->name('contact');
+
 // Authenticated routes
     Route::middleware('auth')->group(function () {
 
