@@ -19,7 +19,7 @@ Route::get('/profile/{username}', [ProfileController::class, 'showProfile'])
 Route::get('/profile/edit/{username}', [ProfileController::class, 'editProfile'])
     ->name('profile.edit.user');
 
-Route::post('/profile', [ProfileController::class, 'updateProfile'])
+Route::post('/profile/{username}', [ProfileController::class, 'updateProfile'])
     ->name('profile.update.public');
 
 // Search bar
@@ -35,9 +35,9 @@ Route::get('/dashboard', [FetchUsernameController::class, 'index'])
 Route::get('/profiles', [FetchUsernameController::class, 'index'])
     ->name('profiles');
 
-    Route::get('/profiles-view', function () {
+    Route::get('/profile-view', function () {
     $users = \App\Models\User::all();
-    return view('profiles-view', compact('users'));
+    return view('public-profiles.profiles-view', compact('users'));
 })->name('profiles.view');
 
 // Upload images
