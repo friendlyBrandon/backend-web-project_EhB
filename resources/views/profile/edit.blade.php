@@ -98,7 +98,7 @@
                         <label class="block text-sm text-gray-300 mb-2">
                             Profile Picture
                         </label>
-                        //Stored in storage\app\public\profile-pictures
+                        <!-- Stored in storage\app\public\profile-pictures -->
 
                         <input type="file"
                                name="profile_picture"

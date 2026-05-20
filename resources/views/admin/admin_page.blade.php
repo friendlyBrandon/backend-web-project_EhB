@@ -9,7 +9,7 @@
 </head>
 
 <body class="bg-gray-900 min-h-screen text-white">
-
+@include('layouts.navigation')
     <!-- Header -->
     <div class="bg-gray-800 border-b border-gray-700 shadow-lg">
         <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
