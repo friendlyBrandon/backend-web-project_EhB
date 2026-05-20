@@ -20,6 +20,10 @@
                         Dashboard
                     </x-nav-link>
 
+                    <x-nav-link :href="route('profiles.view')" :active="request()->routeIs('profiles.view')">
+                        Public profiles
+                    </x-nav-link>
+
                     <x-nav-link :href="route('faq')" :active="request()->routeIs('faq')">
                         FAQ
                     </x-nav-link>
