@@ -17,13 +17,13 @@
                         <!-- Profile Picture -->
                         @if($user->profile_pic_path)
 
-                            <img src="{{ Storage::url($user->profile_pic_path) }}"
-                                 alt="{{ $user->username }}"
-                                 class="w-20 h-20 rounded-full object-cover mx-auto mb-4">
+                            <img src="{{ Storage::url($user->profile_pic_path) }}" alt="{{ $user->username }}"
+                                class="w-20 h-20 rounded-full object-cover mx-auto mb-4">
 
                         @else
 
-                            <div class="w-20 h-20 rounded-full bg-gray-700 mx-auto mb-4 flex items-center justify-center text-white text-2xl">
+                            <div
+                                class="w-20 h-20 rounded-full bg-gray-700 mx-auto mb-4 flex items-center justify-center text-white text-2xl">
                                 {{ strtoupper(substr($user->username, 0, 1)) }}
                             </div>
 
@@ -56,10 +56,10 @@
 
                         @endif
 
-                        <!-- View Profile -->
-                        <a href="{{ route('profile.show', $user->username) }}"
-                           class="inline-block bg-blue-600 hover:bg-blue-700 text-white text-sm px-4 py-2 rounded-lg transition">
-                            View Profile
+                        <!-- Message User -->
+                        <a href="{{ route('messages.show', $user->username) }}"
+                            class="inline-block bg-blue-600 hover:bg-blue-700 text-white text-sm px-4 py-2 rounded-lg transition">
+                            Message {{ $user->username }}
                         </a>
 
                     </div>

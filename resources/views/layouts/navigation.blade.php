@@ -23,6 +23,9 @@
                     <x-nav-link :href="route('profiles.view')" :active="request()->routeIs('profiles.view')">
                         Public profiles
                     </x-nav-link>
+                    <x-nav-link :href="route('messages.inbox')" :active="request()->routeIs('messages.inbox')">
+                        Inbox
+                    </x-nav-link>
                     <x-nav-link :href="route('news')" :active="request()->routeIs('news')">
                         News
                     </x-nav-link>
@@ -40,64 +43,64 @@
             <!-- Right -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
 
-    @auth
-
-        <x-dropdown align="right" width="48">
-
-            <x-slot name="trigger">
-                <button class="px-3 py-2 text-sm text-gray-500 dark:text-gray-300">
-                    {{ auth()->user()->name }}
-                </button>
-            </x-slot>
-
-            <x-slot name="content">
-
-                <x-dropdown-link :href="route('profile.edit')">
-                    Profile
-                </x-dropdown-link>
-
                 @auth
-    @if(auth()->user()->is_admin == 1)
-        <x-dropdown-link :href="route('admin.admin_page')">
-            Admin Panel
-        </x-dropdown-link>
-        @if(auth()->user()->is_admin)
 
-    <x-dropdown-link :href="route('admin.news')">
-        Manage News
-    </x-dropdown-link>
+                    <x-dropdown align="right" width="48">
 
-@endif
-    @endif
-@endauth
+                        <x-slot name="trigger">
+                            <button class="px-3 py-2 text-sm text-gray-500 dark:text-gray-300">
+                                {{ auth()->user()->name }}
+                            </button>
+                        </x-slot>
+
+                        <x-slot name="content">
+
+                            <x-dropdown-link :href="route('profile.edit')">
+                                Profile
+                            </x-dropdown-link>
+
+                            @auth
+                                @if(auth()->user()->is_admin == 1)
+                                    <x-dropdown-link :href="route('admin.admin_page')">
+                                        Admin Panel
+                                    </x-dropdown-link>
+                                    @if(auth()->user()->is_admin)
+
+                                        <x-dropdown-link :href="route('admin.news')">
+                                            Manage News
+                                        </x-dropdown-link>
+
+                                    @endif
+                                @endif
+                            @endauth
 
 
 
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
 
-                    <x-dropdown-link :href="route('logout')"
-                        onclick="event.preventDefault(); this.closest('form').submit();">
-                        Log Out
-                    </x-dropdown-link>
+                                <x-dropdown-link :href="route('logout')"
+                                    onclick="event.preventDefault(); this.closest('form').submit();">
+                                    Log Out
+                                </x-dropdown-link>
 
-                </form>
+                            </form>
 
-            </x-slot>
+                        </x-slot>
 
-        </x-dropdown>
+                    </x-dropdown>
 
-    @else
+                @else
 
-        <div class="flex space-x-3">
-            <a href="{{ route('login') }}" class="text-sm text-gray-500">Login</a>
-           &emsp;
-            <a href="{{ route('register') }}" class="text-sm text-gray-500">Register</a>
-        </div>
+                    <div class="flex space-x-3">
+                        <a href="{{ route('login') }}" class="text-sm text-gray-500">Login</a>
+                        &emsp;
+                        <a href="{{ route('register') }}" class="text-sm text-gray-500">Register</a>
+                    </div>
 
-    @endauth
+                @endauth
 
-</div>
+            </div>
 
             <!-- Mobile Button -->
             <div class="sm:hidden flex items-center">
@@ -120,8 +123,8 @@
             FAQ
         </x-responsive-nav-link>
         <x-nav-link :href="route('contact')" :active="request()->routeIs('contact')">
-    Contact
-</x-nav-link>
+            Contact
+        </x-nav-link>
 
     </div>
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfilePictureController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\SearchBarController;
+use App\Http\Controllers\MessageUsersController;
 use Illuminate\Support\Facades\Route;
 
 // Main page
@@ -36,7 +37,7 @@ Route::get('/dashboard', [FetchUsernameController::class, 'index'])
 Route::get('/profiles', [FetchUsernameController::class, 'index'])
     ->name('profiles');
 
-    Route::get('/profile-view', function () {
+Route::get('/profile-view', function () {
     $users = \App\Models\User::all();
     return view('public-profiles.profiles-view', compact('users'));
 })->name('profiles.view');
@@ -44,6 +45,20 @@ Route::get('/profiles', [FetchUsernameController::class, 'index'])
 // Upload images
 Route::get('/upload/{path}', [ProfilePictureController::class, 'UploadImage'])
     ->name('public-profiles.profile-pictures');
+
+
+//Users messages
+Route::middleware('auth')->group(function () {
+
+    Route::get('/messages/{username}', [MessageUsersController::class, 'show'])
+        ->name('messages.message');
+
+    Route::post('/messages/{username}', [MessageUsersController::class, 'send'])
+        ->name('messages.send');
+
+    Route::get('/inbox', [MessageUsersController::class, 'inbox'])
+        ->name('messages.inbox');
+});
 
 
 //News Page
@@ -75,7 +90,7 @@ Route::get('/contact', function () {
 })->name('contact');
 
 // Authenticated routes
-    Route::middleware('auth')->group(function () {
+Route::middleware('auth')->group(function () {
 
     Route::get('/profile', [ProfileController::class, 'edit'])
         ->name('profile.edit');
@@ -88,15 +103,15 @@ Route::get('/contact', function () {
 
 
     Route::middleware(['auth', 'admin'])->group(function () {
-    Route::get('/admin/admin_page', [AdminController::class, 'index'])
-    ->name('admin.admin_page')
-    ->middleware(['auth', 'admin']);
+        Route::get('/admin/admin_page', [AdminController::class, 'index'])
+            ->name('admin.admin_page')
+            ->middleware(['auth', 'admin']);
 
 
-    Route::post('/admin/toggle/{id}', [AdminController::class, 'toggleAdmin'])
-        ->name('admin.toggle');
+        Route::post('/admin/toggle/{id}', [AdminController::class, 'toggleAdmin'])
+            ->name('admin.toggle');
+    });
+
 });
 
-});
-
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

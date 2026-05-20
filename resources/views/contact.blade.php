@@ -18,8 +18,8 @@
                     Name
                 </label>
                 <input type="text"
-                       class="w-full mt-1 rounded-lg border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-white"
-                       placeholder="Your name">
+                    class="w-full mt-1 rounded-lg border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-white"
+                    placeholder="Your name">
             </div>
 
             <!-- Email -->
@@ -28,8 +28,8 @@
                     Email
                 </label>
                 <input type="email"
-                       class="w-full mt-1 rounded-lg border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-white"
-                       placeholder="you@example.com">
+                    class="w-full mt-1 rounded-lg border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-white"
+                    placeholder="you@example.com">
             </div>
 
             <!-- Message -->
@@ -38,13 +38,12 @@
                     Message
                 </label>
                 <textarea rows="5"
-                          class="w-full mt-1 rounded-lg border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-white"
-                          placeholder="Write your message..."></textarea>
+                    class="w-full mt-1 rounded-lg border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-white"
+                    placeholder="Write your message..."></textarea>
             </div>
 
             <!-- Button -->
-            <button type="submit"
-                    class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg">
+            <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg">
                 Send Message
             </button>
 
