@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\FetchUsernameController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfilePictureController;
+use App\Http\Controllers\NewsController;
 use App\Http\Controllers\SearchBarController;
 use Illuminate\Support\Facades\Route;
 
@@ -43,6 +44,25 @@ Route::get('/profiles', [FetchUsernameController::class, 'index'])
 // Upload images
 Route::get('/upload/{path}', [ProfilePictureController::class, 'UploadImage'])
     ->name('public-profiles.profile-pictures');
+
+
+//News Page
+Route::get('/news', [NewsController::class, 'index'])
+    ->name('news');
+
+//Admin news
+Route::middleware(['auth', 'admin'])->group(function () {
+
+    Route::get('/admin/news', [NewsController::class, 'admin'])
+        ->name('admin.news');
+
+    Route::post('/admin/news', [NewsController::class, 'store'])
+        ->name('admin.news.store');
+
+    Route::delete('/admin/news/{news}', [NewsController::class, 'destroy'])
+        ->name('admin.news.destroy');
+});
+
 
 // FAQ
 Route::get('/FAQ', function () {

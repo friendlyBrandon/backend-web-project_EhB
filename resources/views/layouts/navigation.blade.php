@@ -23,6 +23,9 @@
                     <x-nav-link :href="route('profiles.view')" :active="request()->routeIs('profiles.view')">
                         Public profiles
                     </x-nav-link>
+                    <x-nav-link :href="route('news')" :active="request()->routeIs('news')">
+                        News
+                    </x-nav-link>
 
                     <x-nav-link :href="route('faq')" :active="request()->routeIs('faq')">
                         FAQ
@@ -58,6 +61,13 @@
         <x-dropdown-link :href="route('admin.admin_page')">
             Admin Panel
         </x-dropdown-link>
+        @if(auth()->user()->is_admin)
+
+    <x-dropdown-link :href="route('admin.news')">
+        Manage News
+    </x-dropdown-link>
+
+@endif
     @endif
 @endauth
 
