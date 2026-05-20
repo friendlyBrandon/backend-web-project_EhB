@@ -57,7 +57,7 @@
                         @endif
 
                         <!-- Message User -->
-                        <a href="{{ route('messages.show', $user->username) }}"
+                        <a href="{{ route('messages.message', $user->username) }}"
                             class="inline-block bg-blue-600 hover:bg-blue-700 text-white text-sm px-4 py-2 rounded-lg transition">
                             Message {{ $user->username }}
                         </a>
