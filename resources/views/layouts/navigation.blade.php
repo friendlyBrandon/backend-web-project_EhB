@@ -73,6 +73,7 @@
 
         <div class="flex space-x-3">
             <a href="{{ route('login') }}" class="text-sm text-gray-500">Login</a>
+           &emsp;
             <a href="{{ route('register') }}" class="text-sm text-gray-500">Register</a>
         </div>
 
