@@ -69,7 +69,9 @@ Route::get('/contact', function () {
 
     Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/admin_page', [AdminController::class, 'index'])
+    ->name('admin.admin_page')
     ->middleware(['auth', 'admin']);
+
 
     Route::post('/admin/toggle/{id}', [AdminController::class, 'toggleAdmin'])
         ->name('admin.toggle');

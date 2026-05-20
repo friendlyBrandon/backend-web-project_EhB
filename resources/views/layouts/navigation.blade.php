@@ -49,11 +49,15 @@
                     Profile
                 </x-dropdown-link>
 
-                @if(auth()->user()->is_admin)
-                    <x-dropdown-link :href="route('admin.page')">
-                        Admin Panel
-                    </x-dropdown-link>
-                @endif
+                @auth
+    @if(auth()->user()->is_admin == 1)
+        <x-dropdown-link :href="route('admin.admin_page')">
+            Admin Panel
+        </x-dropdown-link>
+    @endif
+@endauth
+
+
 
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
