@@ -40,6 +40,12 @@ class NewsController extends Controller
 
         return back()->with('success', 'News article created.');
     }
+    public function show(News $news)
+    {
+        $news->load('comments.user');
+
+        return view('news.fullview', compact('news'));
+    }
 
     //Delete article
     public function destroy(News $news)

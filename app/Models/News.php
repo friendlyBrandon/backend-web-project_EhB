@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\CommentsOnNews;
 
 class News extends Model
 {
@@ -11,4 +12,8 @@ class News extends Model
         'content',
         'published',
     ];
+    public function comments()
+{
+    return $this->hasMany(CommentsOnNews::class);
+}
 }

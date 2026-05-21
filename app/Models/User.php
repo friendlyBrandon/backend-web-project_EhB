@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\CommentsOnNews;
 
 #[Fillable(['name', 'username', 'email', 'password', 'bio'])] 
 #[Hidden(['password', 'remember_token'])]
@@ -24,4 +25,8 @@ class User extends Authenticatable
             'interests' => 'array',
         ];
     }
+    public function commentsOnNews()
+{
+    return $this->hasMany(CommentsOnNews::class);
+}
 }

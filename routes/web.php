@@ -8,6 +8,7 @@ use App\Http\Controllers\NewsController;
 use App\Http\Controllers\SearchBarController;
 use App\Http\Controllers\MessageUsersController;
 use App\Http\Controllers\SupportForumController;
+use App\Http\Controllers\CommentController;
 use Illuminate\Support\Facades\Route;
 
 // Main page
@@ -71,6 +72,13 @@ Route::middleware(['auth'])->group(function () {
 //News Page
 Route::get('/news', [NewsController::class, 'index'])
     ->name('news');
+
+Route::get('/news/{news}', [NewsController::class, 'show'])
+    ->name('news.fullview');
+    Route::post('/news/{news}/comments', [CommentController::class, 'store'])
+    ->middleware('auth')
+    ->name('comments.store');
+
 
 //Admin news
 Route::middleware(['auth', 'admin'])->group(function () {

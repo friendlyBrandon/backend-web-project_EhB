@@ -12,7 +12,7 @@
 
             @csrf
 
-            <div class="mb-4">
+            <div class="mb-4 text-white">
                 <label class="block mb-2 font-semibold">
                     Title
                 </label>
@@ -22,7 +22,7 @@
                        class="w-full rounded border-gray-300">
             </div>
 
-            <div class="mb-4">
+            <div class="mb-4 text-white">
                 <label class="block mb-2 font-semibold">
                     Content
                 </label>
@@ -46,17 +46,17 @@
 
                 <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow">
 
-                    <h2 class="text-2xl font-bold">
+                    <h2 class="text-2xl font-bold text-white">
                         {{ $article->title }}
                     </h2>
 
-                    <p class="mt-3">
+                    <p class="mt-3 text-white">
                         {{ $article->content }}
                     </p>
 
                     <form method="POST"
                           action="{{ route('admin.news.destroy', $article) }}"
-                          class="mt-4">
+                          class="mt-4 text-white">
 
                         @csrf
                         @method('DELETE')

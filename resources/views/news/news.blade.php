@@ -1,41 +1,34 @@
 <x-app-layout>
+@forelse($news as $article)
 
-    <div class="max-w-4xl mx-auto py-10 px-4">
+    <div class="bg-white dark:bg-gray-800 shadow rounded-xl p-6">
 
-        <h1 class="text-3xl font-bold mb-8 text-gray-900 dark:text-white">
-            Latest News
-        </h1>
+        <h2 class="text-2xl font-bold text-gray-900 dark:text-white">
+            {{ $article->title }}
+        </h2>
 
-        <div class="space-y-6">
+        <p class="mt-4 text-gray-700 dark:text-gray-300">
+            {{ \Illuminate\Support\Str::limit($article->content, 150) }}
+        </p>
 
-            @forelse($news as $article)
+        <div class="mt-4 flex justify-between items-center">
 
-                <div class="bg-white dark:bg-gray-800 shadow rounded-xl p-6">
+            <div class="text-sm text-gray-500">
+                {{ $article->created_at->format('F d, Y') }}
+            </div>
 
-                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white">
-                        {{ $article->title }}
-                    </h2>
-
-                    <p class="mt-4 text-gray-700 dark:text-gray-300">
-                        {{ $article->content }}
-                    </p>
-
-                    <div class="mt-4 text-sm text-gray-500">
-                        {{ $article->created_at->format('F d, Y') }}
-                    </div>
-
-                </div>
-
-            @empty
-
-                <div class="text-gray-500">
-                    No news available.
-                </div>
-
-            @endforelse
+            <a href="{{ route('news.fullview', $article) }}"
+               class="text-blue-500 hover:underline">
+                Read more →
+            </a>
 
         </div>
 
     </div>
 
+@empty
+
+    <p class="text-gray-500">No news available.</p>
+
+@endforelse
 </x-app-layout>
