@@ -12,7 +12,7 @@
                     : $message->sender;
             @endphp
 
-            <a href="{{ route('messages.show', $otherUser->username) }}"
+            <a href="{{ route('messages.message', $otherUser->username) }}"
                 class="block bg-gray-800 p-4 rounded-xl mb-3 hover:bg-gray-700">
 
                 <div class="font-semibold text-white">
