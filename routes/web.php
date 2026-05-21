@@ -7,6 +7,7 @@ use App\Http\Controllers\ProfilePictureController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\SearchBarController;
 use App\Http\Controllers\MessageUsersController;
+use App\Http\Controllers\SupportForumController;
 use Illuminate\Support\Facades\Route;
 
 // Main page
@@ -60,6 +61,12 @@ Route::middleware('auth')->group(function () {
         ->name('messages.inbox');
 });
 
+Route::middleware(['auth'])->group(function () {
+
+    Route::get('/admin/support-forums', [SupportForumController::class, 'index'])
+        ->name('admin.support-forums');
+
+});
 
 //News Page
 Route::get('/news', [NewsController::class, 'index'])
@@ -88,6 +95,8 @@ Route::get('/FAQ', function () {
 Route::get('/contact', function () {
     return view('contact');
 })->name('contact');
+Route::post('/contact', [SupportForumController::class, 'store'])
+    ->name('contact.store');
 
 // Authenticated routes
 Route::middleware('auth')->group(function () {

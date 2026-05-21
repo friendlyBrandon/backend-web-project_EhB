@@ -10,14 +10,21 @@
             Have a question, suggestion, or issue? Send us a message and we’ll get back to you.
         </p>
 
-        <form class="bg-white dark:bg-gray-800 shadow rounded-xl p-6 space-y-5">
+        @if(session('success'))
+            <div class="mb-4 p-4 bg-green-100 text-white rounded-lg">
+                {{ session('success') }}
+            </div>
+        @endif
+        <form method="POST" action="{{ route('contact.store') }}"
+            class="bg-white dark:bg-gray-800 shadow rounded-xl p-6 space-y-5">
+            @csrf
 
             <!-- Name -->
             <div>
                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">
                     Name
                 </label>
-                <input type="text"
+                <input type="text" name="name"
                     class="w-full mt-1 rounded-lg border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-white"
                     placeholder="Your name">
             </div>
@@ -27,7 +34,7 @@
                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">
                     Email
                 </label>
-                <input type="email"
+                <input type="email" name="email"
                     class="w-full mt-1 rounded-lg border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-white"
                     placeholder="you@example.com">
             </div>
@@ -37,7 +44,7 @@
                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">
                     Message
                 </label>
-                <textarea rows="5"
+                <textarea name="message" rows="5"
                     class="w-full mt-1 rounded-lg border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-white"
                     placeholder="Write your message..."></textarea>
             </div>

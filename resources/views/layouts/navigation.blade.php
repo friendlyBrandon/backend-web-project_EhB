@@ -64,13 +64,13 @@
                                     <x-dropdown-link :href="route('admin.admin_page')">
                                         Admin Panel
                                     </x-dropdown-link>
-                                    @if(auth()->user()->is_admin)
-
                                         <x-dropdown-link :href="route('admin.news')">
                                             Manage News
                                         </x-dropdown-link>
-
-                                    @endif
+                                        <x-dropdown-link :href="route('admin.support-forums')"
+                                            :active="request()->routeIs('admin.support-forums')">
+                                            Support Forums
+                                        </x-dropdown-link>
                                 @endif
                             @endauth
 
