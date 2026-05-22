@@ -32,7 +32,7 @@
                     Title
                 </label>
 
-                <input type="text" name="title" class="w-full rounded border-gray-300">
+                <input type="text" name="title" class="w-full rounded border-gray-300 text-black">
             </div>
 
             <div class="mb-4 text-white">
@@ -40,7 +40,7 @@
                     Content
                 </label>
 
-                <textarea name="content" rows="6" class="w-full rounded border-gray-300"></textarea>
+                <textarea name="content" rows="6" class="w-full rounded border-gray-300 text-black"></textarea>
             </div>
             <div class="mb-4 text-white">
                 <label class="block mb-2 font-semibold">
