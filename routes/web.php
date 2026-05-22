@@ -75,7 +75,7 @@ Route::get('/news', [NewsController::class, 'index'])
 
 Route::get('/news/{news}', [NewsController::class, 'show'])
     ->name('news.fullview');
-    Route::post('/news/{news}/comments', [CommentController::class, 'store'])
+Route::post('/news/{news}/comments', [CommentController::class, 'store'])
     ->middleware('auth')
     ->name('comments.store');
 

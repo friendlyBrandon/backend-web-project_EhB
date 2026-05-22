@@ -10,27 +10,27 @@ use App\Models\User;
 class MessageUsersController extends Controller
 {
     public function show($username)
-{
-    $user = User::where('username', $username)->firstOrFail();
+    {
+        $user = User::where('username', $username)->firstOrFail();
 
-    $userId = Auth::id();
+        $userId = Auth::id();
 
-    $messages = Message::with(['sender', 'receiver'])
-        ->whereNotNull('body')
-        ->where(function ($query) use ($userId, $user) {
-            $query->where([
-                ['sender_id', $userId],
-                ['receiver_id', $user->id],
-            ])->orWhere([
-                ['sender_id', $user->id],
-                ['receiver_id', $userId],
-            ]);
-        })
-        ->orderBy('created_at', 'asc')
-        ->get();
+        $messages = Message::with(['sender', 'receiver'])
+            ->whereNotNull('body')
+            ->where(function ($query) use ($userId, $user) {
+                $query->where([
+                    ['sender_id', $userId],
+                    ['receiver_id', $user->id],
+                ])->orWhere([
+                            ['sender_id', $user->id],
+                            ['receiver_id', $userId],
+                        ]);
+            })
+            ->orderBy('created_at', 'asc')
+            ->get();
 
-    return view('messages.message', compact('user', 'messages'));
-}
+        return view('messages.message', compact('user', 'messages'));
+    }
     public function send(Request $request, $username)
     {
         $request->validate([

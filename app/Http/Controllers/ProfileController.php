@@ -61,7 +61,7 @@ class ProfileController extends Controller
         ]);
     }
 
-     //Edit public profile
+    //Edit public profile
     public function editProfile(string $username)
     {
         $user = User::where('username', $username)->firstOrFail();
@@ -74,35 +74,35 @@ class ProfileController extends Controller
         ]);
     }
 
-     //Update public profile
+    //Update public profile
     public function updateProfile(string $username, Request $request)
-{
-    $user = User::where('username', $username)->firstOrFail();
-    abort_if(auth()->id() !== $user->id, 403);
+    {
+        $user = User::where('username', $username)->firstOrFail();
+        abort_if(auth()->id() !== $user->id, 403);
 
-    $validatedData = $request->validate([
-        'username' => 'required|string|max:255|unique:users,username,' . $user->id,
-        'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
-        'bio' => 'nullable|string',
-        'interests' => 'nullable|array',
-    ]);
+        $validatedData = $request->validate([
+            'username' => 'required|string|max:255|unique:users,username,' . $user->id,
+            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
+            'bio' => 'nullable|string',
+            'interests' => 'nullable|array',
+        ]);
 
-    $user->fill($validatedData);
+        $user->fill($validatedData);
 
-    //Interests
-    $user->interests = $request->interests ?? [];
+        //Interests
+        $user->interests = $request->interests ?? [];
 
-    //Profile pic
-    if ($request->hasFile('profile_picture')) {
+        //Profile pic
+        if ($request->hasFile('profile_picture')) {
 
-        $path = $request->file('profile_picture')
-                        ->store('profile-pictures', 'public');
+            $path = $request->file('profile_picture')
+                ->store('profile-pictures', 'public');
 
-        $user->profile_pic_path = $path;
+            $user->profile_pic_path = $path;
+        }
+
+        $user->save();
+
+        return redirect()->route('profile.show', $user->username);
     }
-
-    $user->save();
-
-    return redirect()->route('profile.show', $user->username);
-}
 }

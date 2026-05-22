@@ -15,6 +15,6 @@ class FetchUsernameController extends Controller
             return redirect()->route('login')->with('error', 'Please log in first.');
         }
 
-        return view('public-profiles.public-profiles', compact('user')); 
+        return view('public-profiles.public-profiles', compact('user'));
     }
 }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +10,7 @@
 </head>
 
 <body class="bg-gray-900 min-h-screen text-white">
-@include('layouts.navigation')
+    @include('layouts.navigation')
     <!-- Header -->
     <div class="bg-gray-800 border-b border-gray-700 shadow-lg">
         <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
@@ -25,7 +26,7 @@
             </div>
 
             <a href="{{ route('dashboard') }}"
-               class="bg-blue-600 hover:bg-blue-700 px-5 py-2 rounded-lg font-semibold transition">
+                class="bg-blue-600 hover:bg-blue-700 px-5 py-2 rounded-lg font-semibold transition">
                 Dashboard
             </a>
 
@@ -101,7 +102,8 @@
 
                                     @if($user->is_admin)
 
-                                        <span class="bg-green-500/20 text-green-400 border border-green-500/30 px-3 py-1 rounded-full text-sm font-semibold">
+                                        <span
+                                            class="bg-green-500/20 text-green-400 border border-green-500/30 px-3 py-1 rounded-full text-sm font-semibold">
                                             Admin
                                         </span>
 
@@ -127,26 +129,21 @@
 
                                     @else
 
-                                        <form action="{{ route('admin.toggle', $user->id) }}"
-                                              method="POST">
+                                        <form action="{{ route('admin.toggle', $user->id) }}" method="POST">
 
                                             @csrf
 
                                             @if($user->is_admin)
 
-                                                <button
-                                                    type="submit"
-                                                    class="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-lg font-semibold transition shadow-md"
-                                                >
+                                                <button type="submit"
+                                                    class="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-lg font-semibold transition shadow-md">
                                                     Remove Admin
                                                 </button>
 
                                             @else
 
-                                                <button
-                                                    type="submit"
-                                                    class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg font-semibold transition shadow-md"
-                                                >
+                                                <button type="submit"
+                                                    class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg font-semibold transition shadow-md">
                                                     Make Admin
                                                 </button>
 
@@ -173,4 +170,5 @@
     </div>
 
 </body>
+
 </html>

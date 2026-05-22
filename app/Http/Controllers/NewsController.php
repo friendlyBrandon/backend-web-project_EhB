@@ -25,29 +25,30 @@ class NewsController extends Controller
         return view('admin.news', compact('news'));
     }
 
-public function store(Request $request)
-{
-    $request->validate([
-        'title' => 'required|max:255',
-        'content' => 'required',
-        'image' => 'nullable|mimes:jpg,jpeg,png,webp,gif|max:2048',
-    ]);
+    public function store(Request $request)
+    {
+        $request->validate([
+            'title' => 'required|max:255',
+            'content' => 'required',
+            'image' => 'nullable|mimes:jpg,jpeg,png,webp,gif|max:2048',
+        ]);
 
-    $imagePath = null;
+        $imagePath = null;
 
-    if ($request->hasFile('image')) {
-        $imagePath = $request->file('image')->store('news', 'public');
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('news', 'public');
+        }
+
+        News::create([
+            'title' => $request->title,
+            'content' => $request->content,
+            'image' => $imagePath,
+            'published' => true,
+        ]);
+
+        return back()->with('success', 'News article created.');
     }
-
-    News::create([
-        'title' => $request->title,
-        'content' => $request->content,
-        'image' => $imagePath,
-        'published' => true,
-    ]);
-
-    return back()->with('success', 'News article created.');
-}    public function show(News $news)
+    public function show(News $news)
     {
         $news->load('comments.user');
 
