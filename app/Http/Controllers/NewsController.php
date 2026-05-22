@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\News;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class NewsController extends Controller
 {
@@ -24,23 +25,29 @@ class NewsController extends Controller
         return view('admin.news', compact('news'));
     }
 
-    //Store article
-    public function store(Request $request)
-    {
-        $request->validate([
-            'title' => 'required|max:255',
-            'content' => 'required',
-        ]);
+public function store(Request $request)
+{
+    $request->validate([
+        'title' => 'required|max:255',
+        'content' => 'required',
+        'image' => 'nullable|mimes:jpg,jpeg,png,webp,gif|max:2048',
+    ]);
 
-        News::create([
-            'title' => $request->title,
-            'content' => $request->content,
-            'published' => true,
-        ]);
+    $imagePath = null;
 
-        return back()->with('success', 'News article created.');
+    if ($request->hasFile('image')) {
+        $imagePath = $request->file('image')->store('news', 'public');
     }
-    public function show(News $news)
+
+    News::create([
+        'title' => $request->title,
+        'content' => $request->content,
+        'image' => $imagePath,
+        'published' => true,
+    ]);
+
+    return back()->with('success', 'News article created.');
+}    public function show(News $news)
     {
         $news->load('comments.user');
 
