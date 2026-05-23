@@ -34,7 +34,6 @@
     style="border-radius: 18px;">
     {{ $message->body }}
 </div>
-
                             @if($isMine)
                                     <img src="{{ Auth::user()->profile_pic_path
                                 ? Storage::url(Auth::user()->profile_pic_path)
