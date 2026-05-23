@@ -26,10 +26,6 @@ Route::get('/profile/edit/{username}', [ProfileController::class, 'editProfile']
 Route::post('/profile/{username}', [ProfileController::class, 'updateProfile'])
     ->name('profile.update.public');
 
-// Search bar
-Route::get('/search', [SearchBarController::class, 'search'])
-    ->name('profile.search');
-
 // Dashboard
 Route::get('/dashboard', [FetchUsernameController::class, 'index'])
     ->middleware(['auth', 'verified'])
@@ -62,13 +58,6 @@ Route::middleware('auth')->group(function () {
         ->name('messages.inbox');
 });
 
-Route::middleware(['auth'])->group(function () {
-
-    Route::get('/admin/support-forums', [SupportForumController::class, 'index'])
-        ->name('admin.support-forums');
-
-});
-
 //News Page
 Route::get('/news', [NewsController::class, 'index'])
     ->name('news');
@@ -78,21 +67,6 @@ Route::get('/news/{news}', [NewsController::class, 'show'])
 Route::post('/news/{news}/comments', [CommentController::class, 'store'])
     ->middleware('auth')
     ->name('comments.store');
-
-
-//Admin news
-Route::middleware(['auth', 'admin'])->group(function () {
-
-    Route::get('/admin/news', [NewsController::class, 'admin'])
-        ->name('admin.news');
-
-    Route::post('/admin/news', [NewsController::class, 'store'])
-        ->name('admin.news.store');
-
-    Route::delete('/admin/news/{news}', [NewsController::class, 'destroy'])
-        ->name('admin.news.destroy');
-});
-
 
 // FAQ
 Route::get('/FAQ', function () {
@@ -106,7 +80,7 @@ Route::get('/contact', function () {
 Route::post('/contact', [SupportForumController::class, 'store'])
     ->name('contact.store');
 
-// Authenticated routes
+//Auth to profile
 Route::middleware('auth')->group(function () {
 
     Route::get('/profile', [ProfileController::class, 'edit'])
@@ -119,6 +93,7 @@ Route::middleware('auth')->group(function () {
         ->name('profile.destroy');
 
 
+    //Auth admin page
     Route::middleware(['auth', 'admin'])->group(function () {
         Route::get('/admin/admin_page', [AdminController::class, 'index'])
             ->name('admin.admin_page')
@@ -127,6 +102,24 @@ Route::middleware('auth')->group(function () {
 
         Route::post('/admin/toggle/{id}', [AdminController::class, 'toggleAdmin'])
             ->name('admin.toggle');
+    });
+    Route::middleware(['auth'])->group(function () {
+
+        Route::get('/admin/support-forums', [SupportForumController::class, 'index'])
+            ->name('admin.support-forums');
+
+    });
+    //Admin news
+    Route::middleware(['auth', 'admin'])->group(function () {
+
+        Route::get('/admin/news', [NewsController::class, 'admin'])
+            ->name('admin.news');
+
+        Route::post('/admin/news', [NewsController::class, 'store'])
+            ->name('admin.news.store');
+
+        Route::delete('/admin/news/{news}', [NewsController::class, 'destroy'])
+            ->name('admin.news.destroy');
     });
 
 });
