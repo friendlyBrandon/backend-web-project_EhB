@@ -33,6 +33,16 @@
                         <h2 class="text-xl font-bold mb-2">
                             {{ $user->username }}
                         </h2>
+                        
+                        @if($user->birthday)
+                            <div class="mt-4">
+                                <h3 class="font-semibold">Birthday</h3>
+
+                                <p>
+                                    {{ $user->birthday->format('F d, Y') }}
+                                </p>
+                            </div>
+                        @endif
 
                         <!-- Bio -->
                         <p class="text-gray-300 text-sm mb-4">

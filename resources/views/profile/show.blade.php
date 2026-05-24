@@ -27,6 +27,16 @@
                 {{ $user->username }}
             </h1>
 
+            @if($user->birthday)
+                <div class="mt-4">
+                    <h3 class="font-semibold">Birthday</h3>
+
+                    <p>
+                        {{ $user->birthday->format('F d, Y') }}
+                    </p>
+                </div>
+            @endif
+
             <!-- Bio -->
             <p class="text-gray-300 mb-6">
                 {{ $user->bio ?? 'No bio available yet.' }}

@@ -10,7 +10,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\CommentsOnNews;
 
-#[Fillable(['name', 'username', 'email', 'password', 'bio'])] 
+#[Fillable(['name', 'username', 'email', 'password', 'bio', 'birthday'])] 
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
@@ -23,6 +23,7 @@ class User extends Authenticatable
             'password' => 'hashed',
             'is_admin' => 'boolean',
             'interests' => 'array',
+            'birthday' => 'date',
         ];
     }
     public function commentsOnNews()

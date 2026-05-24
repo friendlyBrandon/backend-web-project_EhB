@@ -85,6 +85,7 @@ class ProfileController extends Controller
             'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
             'bio' => 'nullable|string',
             'interests' => 'nullable|array',
+            'birthday' => 'nullable|date',
         ]);
 
         $user->fill($validatedData);

@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'admin',
             'email' => 'admin@ehb.be',
             'password' => bcrypt('Password!321'),
-            'username' => 'randomUsername',
+            'username' => 'EHBAdmin',
             'is_admin' => '1',
         ]);
     }

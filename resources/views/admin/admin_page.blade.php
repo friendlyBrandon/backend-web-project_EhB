@@ -25,11 +25,6 @@
                 </p>
             </div>
 
-            <a href="{{ route('dashboard') }}"
-                class="bg-blue-600 hover:bg-blue-700 px-5 py-2 rounded-lg font-semibold transition">
-                Dashboard
-            </a>
-
         </div>
     </div>
 

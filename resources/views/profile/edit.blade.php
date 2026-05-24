@@ -78,6 +78,19 @@
                                class="w-full bg-gray-700 border border-gray-600 rounded-xl px-4 py-3 text-black focus:outline-none focus:ring-2 focus:ring-blue-500">
 
                     </div>
+                    <div class="mt-4">
+    <label for="birthday" class="block text-sm font-medium text-white-700">
+        Birthday
+    </label>
+
+    <input
+        type="date"
+        name="birthday"
+        id="birthday"
+        value="{{ old('birthday', optional($user->birthday)->format('Y-m-d')) }}"
+        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm text-black"
+    >
+</div>
 
                     <!-- Bio -->
                     <div>
