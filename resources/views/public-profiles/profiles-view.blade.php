@@ -33,7 +33,7 @@
                         <h2 class="text-xl font-bold mb-2">
                             {{ $user->username }}
                         </h2>
-                        
+
                         @if($user->birthday)
                             <div class="mt-4">
                                 <h3 class="font-semibold">Birthday</h3>
@@ -66,11 +66,21 @@
 
                         @endif
 
-                        <!-- Message User -->
-                        <a href="{{ route('messages.message', $user->username) }}"
-                            class="inline-block bg-blue-600 hover:bg-blue-700 text-white text-sm px-4 py-2 rounded-lg transition">
-                            Message {{ $user->username }}
-                        </a>
+                        @if(auth()->id() !== $user->id)
+
+                            <a href="{{ route('messages.message', $user->username) }}"
+                                class="inline-block bg-blue-600 hover:bg-blue-700 text-white text-sm px-4 py-2 rounded-lg transition">
+                                Message {{ $user->username }}
+                            </a>
+
+                        @else
+
+                            <span
+                                class="inline-block bg-gray-700 text-gray-400 text-sm px-4 py-2 rounded-lg cursor-not-allowed">
+                                This is you
+                            </span>
+
+                        @endif
 
                     </div>
 
