@@ -55,6 +55,45 @@ class NewsController extends Controller
         return view('news.fullview', compact('news'));
     }
 
+    //Show edit form
+public function edit(News $news)
+{
+    return view('admin.edit-news', compact('news'));
+}
+
+//Update article
+public function update(Request $request, News $news)
+{
+    $request->validate([
+        'title' => 'required|max:255',
+        'content' => 'required',
+        'image' => 'nullable|mimes:jpg,jpeg,png,webp,gif|max:2048',
+    ]);
+
+    //Keep old image by default
+    $imagePath = $news->image;
+
+    if ($request->hasFile('image')) {
+
+        // Delete old image
+        if ($news->image) {
+            Storage::disk('public')->delete($news->image);
+        }
+
+        $imagePath = $request->file('image')->store('news', 'public');
+    }
+
+    $news->update([
+        'title' => $request->title,
+        'content' => $request->content,
+        'image' => $imagePath,
+    ]);
+
+    return redirect()
+        ->route('admin.news')
+        ->with('success', 'News article updated.');
+}
+
     //Delete article
     public function destroy(News $news)
     {

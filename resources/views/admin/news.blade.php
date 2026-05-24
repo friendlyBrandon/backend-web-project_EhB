@@ -1,5 +1,5 @@
 @if ($errors->any())
-    <div class="bg-red-500 text-white p-4 rounded mb-6">
+    <div class="bg-red-500 text-black p-4 rounded mb-6">
         <ul class="list-disc ml-6">
             @foreach ($errors->all() as $error)
                 <li>{{ $error }}</li>
@@ -71,6 +71,10 @@
                         {{ $article->content }}
                     </p>
 
+                    <a href="{{ route('admin.news.edit', $article) }}"
+                        class="bg-yellow-500 text-white px-4 py-2 rounded inline-block mt-4">
+                        Edit
+                    </a>
                     <form method="POST" action="{{ route('admin.news.destroy', $article) }}" class="mt-4 text-white">
 
                         @csrf
