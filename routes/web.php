@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Route;
 
 
 //Home
-Route::get('/', fn () => view('welcome'));
+Route::get('/', fn() => view('welcome'));
 
 //News
 Route::get('/news', [NewsController::class, 'index'])->name('news');
@@ -87,9 +87,10 @@ Route::post('/profile/{username}', [ProfileController::class, 'updateProfile'])
 Route::get('/profiles', [FetchUsernameController::class, 'index'])
     ->name('profiles');
 
-Route::view('/profile-view', 'public-profiles.profiles-view')
-    ->with('users', \App\Models\User::all())
-    ->name('profiles.view');
+Route::get('/profile-view', function () {
+    $users = \App\Models\User::all();
+    return view('public-profiles.profiles-view', compact('users'));
+})->name('profiles.view');
 
 
 //Profile picture
