@@ -9,7 +9,7 @@
 @endif
 
 @if(session('success'))
-    <div class="bg-green-500 text-white p-4 rounded mb-6">
+    <div class="bg-green-500 text-black p-4 rounded mb-6">
         {{ session('success') }}
     </div>
 @endif

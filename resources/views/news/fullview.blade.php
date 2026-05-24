@@ -4,7 +4,7 @@
     <div class="max-w-4xl mx-auto py-10 px-4">
 
         <!-- ARTICLE -->
-        <div class="bg-white dark:bg-gray-800 shadow rounded-xl p-6">
+        <div class="bg-white dark:bg-gray-800 shadow text-white rounded-xl p-6">
 
             <h1 class="text-3xl font-bold text-gray-900 dark:text-white">
                 {{ $news->title }}
