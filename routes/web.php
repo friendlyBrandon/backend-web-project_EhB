@@ -5,49 +5,41 @@ use App\Http\Controllers\FetchUsernameController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfilePictureController;
 use App\Http\Controllers\NewsController;
-use App\Http\Controllers\SearchBarController;
 use App\Http\Controllers\MessageUsersController;
 use App\Http\Controllers\SupportForumController;
 use App\Http\Controllers\CommentController;
 use Illuminate\Support\Facades\Route;
 
-// Main page
-Route::get('/', function () {
-    return view('welcome');
-});
 
-// Public profile routes
-Route::get('/profile/{username}', [ProfileController::class, 'showProfile'])
-    ->name('profile.show');
+//Home
+Route::get('/', fn () => view('welcome'));
 
-Route::get('/profile/edit/{username}', [ProfileController::class, 'editProfile'])
-    ->name('profile.edit.user');
+//News
+Route::get('/news', [NewsController::class, 'index'])->name('news');
+Route::get('/news/{news}', [NewsController::class, 'show'])->name('news.fullview');
 
-Route::post('/profile/{username}', [ProfileController::class, 'updateProfile'])
-    ->name('profile.update.public');
+Route::post('/news/{news}/comments', [CommentController::class, 'store'])
+    ->middleware('auth')
+    ->name('comments.store');
 
-// Dashboard
-Route::get('/dashboard', [FetchUsernameController::class, 'index'])
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
+//FAQ
+Route::view('/FAQ', 'FAQ.FAQ')->name('faq');
 
-// Profiles page
-Route::get('/profiles', [FetchUsernameController::class, 'index'])
-    ->name('profiles');
-
-Route::get('/profile-view', function () {
-    $users = \App\Models\User::all();
-    return view('public-profiles.profiles-view', compact('users'));
-})->name('profiles.view');
-
-// Upload images
-Route::get('/upload/{path}', [ProfilePictureController::class, 'UploadImage'])
-    ->name('public-profiles.profile-pictures');
+//Contact
+Route::view('/contact', 'contact')->name('contact');
+Route::post('/contact', [SupportForumController::class, 'store'])->name('contact.store');
 
 
-//Users messages
 Route::middleware('auth')->group(function () {
 
+    Route::get('/dashboard', [FetchUsernameController::class, 'index'])
+        ->name('dashboard');
+
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    //Messaging
     Route::get('/messages/{username}', [MessageUsersController::class, 'show'])
         ->name('messages.message');
 
@@ -58,70 +50,51 @@ Route::middleware('auth')->group(function () {
         ->name('messages.inbox');
 });
 
-//News Page
-Route::get('/news', [NewsController::class, 'index'])
-    ->name('news');
 
-Route::get('/news/{news}', [NewsController::class, 'show'])
-    ->name('news.fullview');
-Route::post('/news/{news}/comments', [CommentController::class, 'store'])
-    ->middleware('auth')
-    ->name('comments.store');
+Route::prefix('admin')
+    ->name('admin.')
+    ->middleware(['auth', 'admin'])
+    ->group(function () {
 
-// FAQ
-Route::get('/FAQ', function () {
-    return view('FAQ.FAQ');
-})->name('faq');
+        //Admin dash
+        Route::get('/admin_page', [AdminController::class, 'index'])
+            ->name('admin_page');
 
-//Contact us
-Route::get('/contact', function () {
-    return view('contact');
-})->name('contact');
-Route::post('/contact', [SupportForumController::class, 'store'])
-    ->name('contact.store');
+        Route::post('/toggle/{id}', [AdminController::class, 'toggleAdmin'])
+            ->name('toggle');
 
-//Auth to profile
-Route::middleware('auth')->group(function () {
+        Route::get('/support-forums', [SupportForumController::class, 'index'])
+            ->name('support-forums');
 
-    Route::get('/profile', [ProfileController::class, 'edit'])
-        ->name('profile.edit');
-
-    Route::patch('/profile', [ProfileController::class, 'update'])
-        ->name('profile.update');
-
-    Route::delete('/profile', [ProfileController::class, 'destroy'])
-        ->name('profile.destroy');
-
-
-    //Auth admin page
-    Route::middleware(['auth', 'admin'])->group(function () {
-        Route::get('/admin/admin_page', [AdminController::class, 'index'])
-            ->name('admin.admin_page')
-            ->middleware(['auth', 'admin']);
-
-
-        Route::post('/admin/toggle/{id}', [AdminController::class, 'toggleAdmin'])
-            ->name('admin.toggle');
-    });
-    Route::middleware(['auth'])->group(function () {
-
-        Route::get('/admin/support-forums', [SupportForumController::class, 'index'])
-            ->name('admin.support-forums');
-
-    });
-    //Admin news
-    Route::middleware(['auth', 'admin'])->group(function () {
-
-        Route::get('/admin/news', [NewsController::class, 'admin'])
-            ->name('admin.news');
-
-        Route::post('/admin/news', [NewsController::class, 'store'])
-            ->name('admin.news.store');
-
-        Route::delete('/admin/news/{news}', [NewsController::class, 'destroy'])
-            ->name('admin.news.destroy');
+        Route::get('/news', [NewsController::class, 'admin'])->name('news');
+        Route::post('/news', [NewsController::class, 'store'])->name('news.store');
+        Route::get('/news/{news}/edit', [NewsController::class, 'edit'])->name('news.edit');
+        Route::put('/news/{news}', [NewsController::class, 'update'])->name('news.update');
+        Route::delete('/news/{news}', [NewsController::class, 'destroy'])->name('news.destroy');
     });
 
-});
+
+//Public Profiles
+Route::get('/profile/{username}', [ProfileController::class, 'showProfile'])
+    ->name('profile.show');
+
+Route::get('/profile/edit/{username}', [ProfileController::class, 'editProfile'])
+    ->name('profile.edit.user');
+
+Route::post('/profile/{username}', [ProfileController::class, 'updateProfile'])
+    ->name('profile.update.public');
+
+Route::get('/profiles', [FetchUsernameController::class, 'index'])
+    ->name('profiles');
+
+Route::view('/profile-view', 'public-profiles.profiles-view')
+    ->with('users', \App\Models\User::all())
+    ->name('profiles.view');
+
+
+//Profile picture
+Route::get('/upload/{path}', [ProfilePictureController::class, 'UploadImage'])
+    ->name('public-profiles.profile-pictures');
+
 
 require __DIR__ . '/auth.php';
