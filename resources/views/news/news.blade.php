@@ -1,5 +1,5 @@
 <div x-data="{ open: null }"></div>
-<x-app-layout>
+<center><x-app-layout>
     @forelse($news as $article)
 
         <div class="bg-white dark:bg-gray-800 shadow rounded-xl p-6">
@@ -14,7 +14,7 @@
 
             <div class="mt-4 flex justify-between items-center">
 
-                <div class="text-sm text-gray-500">
+                <div class="text-sm text-white">
                     {{ $article->created_at->format('F d, Y') }}
                     <div class="bg-white dark:bg-gray-800 shadow rounded-xl p-6">
 
@@ -49,4 +49,4 @@
                 <p class="text-gray-500">No news available.</p>
 
             @endforelse
-</x-app-layout>
+</x-app-layout></center>
