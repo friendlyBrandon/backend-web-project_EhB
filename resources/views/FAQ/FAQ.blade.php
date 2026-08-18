@@ -27,8 +27,8 @@
             <!-- Information about billing -->
             <div class="bg-white dark:bg-gray-800 rounded-xl shadow">
                 <button class="w-full text-left px-5 py-4 font-semibold text-gray-900 dark:text-gray-100"
-                    @click="window.location.href='/FAQ_billing'">
-                    Billing questions
+                    @click="window.location.href='/FAQ_safe'">
+                    How to stay safe on BuddyTalks
                 </button>
             </div>
 
@@ -40,10 +40,10 @@
                 </button>
             </div>
 
-        <div class="text-center mt-10 text-sm text-gray-500 dark:text-gray-400">
-            Got questions that aren't mentioned in the FAQ? Contact support anytime.
-        </div>
+            <div class="text-center mt-10 text-sm text-gray-500 dark:text-gray-400">
+                Got questions that aren't mentioned in the FAQ? Contact support anytime.
+            </div>
 
-    </div>
+        </div>
 
 </x-app-layout>

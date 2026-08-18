@@ -25,7 +25,7 @@ Route::post('/news/{news}/comments', [CommentController::class, 'store'])
 //FAQ
 Route::view('/FAQ', 'FAQ.FAQ')->name('faq');
 Route::view('/FAQ_technical', 'FAQ.FAQ_technical');
-Route::view('/FAQ_billing', 'FAQ.FAQ_billing');
+Route::view('/FAQ_safe', 'FAQ.FAQ_safe');
 Route::view('/FAQ_data', 'FAQ.FAQ_data');
 Route::view('/FAQ_general', 'FAQ.FAQ_general');
 
