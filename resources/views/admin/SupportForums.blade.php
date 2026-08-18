@@ -12,10 +12,10 @@
 
                 <thead class="bg-gray-100 dark:bg-gray-700">
                     <tr>
-                        <th class="text-left p-4">Name</th>
-                        <th class="text-left p-4">Email</th>
-                        <th class="text-left p-4">Message</th>
-                        <th class="text-left p-4">Date</th>
+                        <th class="text-left text-white p-4">Name</th>
+                        <th class="text-left text-white p-4">Email</th>
+                        <th class="text-left text-white p-4">Message</th>
+                        <th class="text-left text-white p-4">Date</th>
                     </tr>
                 </thead>
 
