@@ -5,14 +5,22 @@
 
 - FAQ
 
--FAQ updating (DONE!)
-
 -Allow admin(s) to edit FAQ (TO-DO 19/08)
 
 - Inbox
 
 -Inbox updating after inbox is opened
 
-- News
+- News admin bug fix!!
 
--Read more button must be clearer/color scheme (DONE!)
+-Get rid of whitespace between "News article deleted" and navbar top screen.
+
+-Choose file button must be cleaner as it looks too basic. (must be updated on every page)
+
+
+---------------------
+Tasks that are done: 
+
+- FAQ updating (DONE!)
+- Support message page change table text from black to white (DONE!)
+- Read more button must be clearer/color scheme (DONE!)
