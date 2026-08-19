@@ -15,6 +15,14 @@ class MessageUsersController extends Controller
 
         $userId = Auth::id();
 
+        // Mark incoming messages from this user as read
+        Message::where('sender_id', $user->id)
+            ->where('receiver_id', $userId)
+            ->where('is_read', false)
+            ->update([
+                'is_read' => true,
+            ]);
+
         $messages = Message::with(['sender', 'receiver'])
             ->whereNotNull('body')
             ->where(function ($query) use ($userId, $user) {
@@ -52,8 +60,8 @@ class MessageUsersController extends Controller
         $userId = Auth::id();
 
         $messages = Message::with(['sender', 'receiver'])
-            ->where('sender_id', $userId)
-            ->orWhere('receiver_id', $userId)
+            ->where('receiver_id', $userId)
+            ->where('is_read', false)
             ->latest()
             ->get();
 
