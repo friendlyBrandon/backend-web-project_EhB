@@ -1,19 +1,19 @@
-@if ($errors->any())
-    <div class="bg-red-500 text-black p-4 rounded mb-6">
-        <ul class="list-disc ml-6">
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
-
-@if(session('success'))
-    <div class="bg-green-500 text-black p-4 rounded mb-6">
-        {{ session('success') }}
-    </div>
-@endif
 <x-app-layout>
+    @if ($errors->any())
+        <div class="bg-red-500 text-black p-4 rounded mb-6">
+            <ul class="list-disc ml-6">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    @if(session('success'))
+        <div class="bg-green-500 text-black p-4 rounded mb-6">
+            {{ session('success') }}
+        </div>
+    @endif
 
     <div class="max-w-4xl mx-auto py-10 px-4">
 
