@@ -15,7 +15,7 @@ class MessageUsersController extends Controller
 
         $userId = Auth::id();
 
-        // Mark incoming messages from this user as read
+        //Mark only messages sent by user to logged-in user as read
         Message::where('sender_id', $user->id)
             ->where('receiver_id', $userId)
             ->where('is_read', false)
@@ -23,22 +23,25 @@ class MessageUsersController extends Controller
                 'is_read' => true,
             ]);
 
+        //Only retrieve messages between the logged-in user and selected user
         $messages = Message::with(['sender', 'receiver'])
             ->whereNotNull('body')
             ->where(function ($query) use ($userId, $user) {
-                $query->where([
-                    ['sender_id', $userId],
-                    ['receiver_id', $user->id],
-                ])->orWhere([
-                            ['sender_id', $user->id],
-                            ['receiver_id', $userId],
-                        ]);
+                $query->where(function ($query) use ($userId, $user) {
+                    $query->where('sender_id', $userId)
+                        ->where('receiver_id', $user->id);
+                })
+                ->orWhere(function ($query) use ($userId, $user) {
+                    $query->where('sender_id', $user->id)
+                        ->where('receiver_id', $userId);
+                });
             })
             ->orderBy('created_at', 'asc')
             ->get();
 
         return view('messages.message', compact('user', 'messages'));
     }
+
     public function send(Request $request, $username)
     {
         $request->validate([
@@ -48,17 +51,20 @@ class MessageUsersController extends Controller
         $receiver = User::where('username', $username)->firstOrFail();
 
         Message::create([
-            'sender_id' => auth()->id(),
+            'sender_id' => Auth::id(),
             'receiver_id' => $receiver->id,
             'body' => $request->message,
+            'is_read' => false,
         ]);
 
         return back()->with('success', 'Message sent!');
     }
+
     public function inbox()
     {
         $userId = Auth::id();
 
+        //Only show unread messages where the logged-in user is receiver
         $messages = Message::with(['sender', 'receiver'])
             ->where('receiver_id', $userId)
             ->where('is_read', false)
