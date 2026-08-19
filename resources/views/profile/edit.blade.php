@@ -61,7 +61,7 @@
                         <input type="text"
                                name="username"
                                value="{{ old('username', $user->username) }}"
-                               class="w-full bg-gray-700 border border-gray-600 rounded-xl px-4 py-3 text-black focus:outline-none focus:ring-2 focus:ring-blue-500">
+                               class="w-full bg-gray-700 border border-gray-600 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
 
                     </div>
 
@@ -75,7 +75,7 @@
                         <input type="email"
                                name="email"
                                value="{{ old('email', $user->email) }}"
-                               class="w-full bg-gray-700 border border-gray-600 rounded-xl px-4 py-3 text-black focus:outline-none focus:ring-2 focus:ring-blue-500">
+                               class="w-full bg-gray-700 border border-gray-600 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
 
                     </div>
                     <div class="mt-4">
@@ -101,7 +101,7 @@
 
                         <textarea name="bio"
                                   rows="4"
-                                  class="w-full bg-gray-700 border border-gray-600 rounded-xl px-4 py-3 text-black focus:outline-none focus:ring-2 focus:ring-blue-500">{{ old('bio', $user->bio) }}</textarea>
+                                  class="w-full bg-gray-700 border border-gray-600 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500">{{ old('bio', $user->bio) }}</textarea>
 
                     </div>
 
