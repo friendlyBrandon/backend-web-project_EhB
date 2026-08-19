@@ -7,10 +7,6 @@
 
 -Allow admin(s) to edit FAQ (TO-DO 20/08 or 21/08 thanks to having wrist pain atm)
 
-- News admin
-
--Choose file button must be cleaner as it looks too basic. (must be updated on every page)
-
 
 ---------------------
 Tasks that are done: 
@@ -20,3 +16,4 @@ Tasks that are done:
 - Read more button must be clearer/color scheme (DONE!)
 - Inbox updating after inbox is opened (DONE!)
 - Get rid of whitespace between "News article deleted" and navbar top screen. (DONE!)
+- Choose file button must be cleaner as it looks too basic. (must be updated on every page) (DONE!)

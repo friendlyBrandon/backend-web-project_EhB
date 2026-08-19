@@ -113,9 +113,7 @@
                         </label>
                         <!-- Stored in storage\app\public\profile-pictures -->
 
-                        <input type="file"
-                               name="profile_picture"
-                               class="w-full text-sm text-gray-300">
+                        <x-file-upload name="profile_picture" />
 
                     </div>
 

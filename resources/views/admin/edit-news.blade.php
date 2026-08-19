@@ -45,7 +45,7 @@
                     Replace Image
                 </label>
 
-                <input type="file" name="image" class="w-full rounded border-gray-300">
+                <x-file-upload name="image" />
             </div>
 
             @if($news->image)

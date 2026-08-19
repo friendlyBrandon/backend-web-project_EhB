@@ -47,7 +47,7 @@
                     News Image
                 </label>
 
-                <input type="file" name="image" class="w-full rounded border-gray-300">
+                <x-file-upload name="image" />
             </div>
 
             <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">
