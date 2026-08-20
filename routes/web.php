@@ -8,6 +8,7 @@ use App\Http\Controllers\NewsController;
 use App\Http\Controllers\MessageUsersController;
 use App\Http\Controllers\SupportForumController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\FAQController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -24,10 +25,34 @@ Route::post('/news/{news}/comments', [CommentController::class, 'store'])
 
 //FAQ
 Route::view('/FAQ', 'FAQ.FAQ')->name('faq');
-Route::view('/FAQ_technical', 'FAQ.FAQ_technical');
-Route::view('/FAQ_safe', 'FAQ.FAQ_safe');
-Route::view('/FAQ_data', 'FAQ.FAQ_data');
-Route::view('/FAQ_general', 'FAQ.FAQ_general');
+Route::get('/FAQ_general', [FaqController::class, 'general']);
+Route::get('/FAQ_data', [FaqController::class, 'data']);
+Route::get('/FAQ_safe', [FaqController::class, 'safe']);
+Route::get('/FAQ_technical', [FaqController::class, 'technical']);
+
+
+//FAQ admin
+// Admin FAQ management
+Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/faqs', [FaqController::class, 'adminIndex'])
+        ->name('faqs.index');
+
+    Route::get('/faqs/create', [FaqController::class, 'create'])
+        ->name('faqs.create');
+
+    Route::post('/faqs', [FaqController::class, 'store'])
+        ->name('faqs.store');
+
+    Route::get('/faqs/{faq}/edit', [FaqController::class, 'edit'])
+        ->name('faqs.edit');
+
+    Route::put('/faqs/{faq}', [FaqController::class, 'update'])
+        ->name('faqs.update');
+
+    Route::delete('/faqs/{faq}', [FaqController::class, 'destroy'])
+        ->name('faqs.destroy');
+});
+
 
 //Contact
 Route::view('/contact', 'contact')->name('contact');

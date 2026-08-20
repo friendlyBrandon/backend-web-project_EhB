@@ -71,6 +71,10 @@
                                         :active="request()->routeIs('admin.support-forums')">
                                         Support Forums
                                     </x-dropdown-link>
+                                    <x-dropdown-link :href="route('admin.faqs.index')"
+                                        :active="request()->routeIs('admin.faqs.index')">
+                                        Edit FAQs
+                                    </x-dropdown-link>
                                 @endif
                             @endauth
 

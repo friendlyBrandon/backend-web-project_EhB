@@ -8,17 +8,34 @@
 
         <div class="space-y-4" x-data="{ open: null }">
 
-            <!-- 1 -->
-            <div class="bg-white dark:bg-gray-800 rounded-xl shadow">
-                <button class="w-full text-left px-5 py-4 font-semibold text-gray-900 dark:text-gray-100"
-                    @click="open = open === 1 ? null : 1">
-                    What should I do if the website doesn't load on my home network?
-                </button>
-                <div x-show="open === 1" class="px-5 pb-4 text-gray-700 text-center dark:text-gray-300">
-                    Contact your Internet Service Provider (company that supplies your network) and kindly ask if there
-                    are any technical issues on their end.
+            @forelse ($faqs as $faq)
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow">
+
+                    <button
+                        class="w-full text-left px-5 py-4 font-semibold text-gray-900 dark:text-gray-100"
+                        @click="open = open === {{ $faq->id }} ? null : {{ $faq->id }}"
+                    >
+                        {{ $faq->question }}
+                    </button>
+
+                    <div
+                        x-show="open === {{ $faq->id }}"
+                        class="px-5 pb-4 text-gray-700 text-center dark:text-gray-300"
+                    >
+                        {{ $faq->answer }}
+                    </div>
+
                 </div>
-            </div>
+            @empty
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow p-5">
+                    <p class="text-gray-700 dark:text-gray-300 text-center">
+                        There are currently no FAQs in this category.
+                    </p>
+                </div>
+            @endforelse
+
         </div>
+
+    </div>
 
 </x-app-layout>

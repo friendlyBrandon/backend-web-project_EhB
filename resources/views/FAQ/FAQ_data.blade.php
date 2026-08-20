@@ -8,37 +8,34 @@
 
         <div class="space-y-4" x-data="{ open: null }">
 
-            <div class="bg-white dark:bg-gray-800 rounded-xl shadow">
-                <button class="w-full text-left px-5 py-4 font-semibold text-gray-900 dark:text-gray-100"
-                    @click="open = open === 1 ? null : 1">
-                    What personal information does BuddyTalks collect?
-                </button>
-                <div x-show="open === 1" class="px-5 pb-4 text-gray-700 text-center dark:text-gray-300">
-                    BuddyTalks may collect information such as your name, email address, profile details, interests, and
-                    information you choose to share while using the platform.
-                </div>
-            </div>
+            @forelse ($faqs as $faq)
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow">
 
-            <div class="bg-white dark:bg-gray-800 rounded-xl shadow">
-                <button class="w-full text-left px-5 py-4 font-semibold text-gray-900 dark:text-gray-100"
-                    @click="open = open === 2 ? null : 2">
-                    Does BuddyTalks sell my personal data?
-                </button>
-                <div x-show="open === 2" class="px-5 pb-4 text-gray-700 text-center dark:text-gray-300">
-                    No. BuddyTalks does not sell your personal information to third parties.
-                </div>
-            </div>
+                    <button
+                        class="w-full text-left px-5 py-4 font-semibold text-gray-900 dark:text-gray-100"
+                        @click="open = open === {{ $loop->iteration }} ? null : {{ $loop->iteration }}"
+                    >
+                        {{ $faq->question }}
+                    </button>
 
-            <div class="bg-white dark:bg-gray-800 rounded-xl shadow">
-                <button class="w-full text-left px-5 py-4 font-semibold text-gray-900 dark:text-gray-100"
-                    @click="open = open === 3 ? null : 3">
-                    Can I delete my account and personal data?
-                </button>
-                <div x-show="open === 3" class="px-5 pb-4 text-gray-700 text-center dark:text-gray-300">
-                    Yes. You can request to delete your account and associated personal information, subject to any
-                    information we may be required to retain for legal, security, or legitimate business purposes.
+                    <div
+                        x-show="open === {{ $loop->iteration }}"
+                        class="px-5 pb-4 text-gray-700 text-center dark:text-gray-300"
+                    >
+                        {{ $faq->answer }}
+                    </div>
+
                 </div>
-            </div>
+            @empty
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow p-5">
+                    <p class="text-gray-700 dark:text-gray-300 text-center">
+                        There are currently no FAQs in this category.
+                    </p>
+                </div>
+            @endforelse
+
         </div>
+
+    </div>
 
 </x-app-layout>
